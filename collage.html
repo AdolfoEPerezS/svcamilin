@@ -45,9 +45,6 @@
             object-fit: cover;
             border-radius: 10px;
         }
-        input {
-            margin-top: 20px;
-        }
     </style>
 </head>
 <body>
@@ -55,32 +52,32 @@
     <div class="collage" id="collage"></div>
     <h2>Por muchísimos 14 de febrero juntos</h2>
     
-    <input type="file" id="fileInput" multiple accept="image/*">
-    
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const collage = document.getElementById("collage");
-            const storedImages = JSON.parse(localStorage.getItem("collageImages")) || [];
-            
-            storedImages.forEach(src => {
+
+            const imageLinks = [
+                "https://raw.githubusercontent.com/AdolfoEPerezS/svcamilin/main/Imagen%20de%20WhatsApp%202025-02-12%20a%20las%2001.11.23_2dd9cd5d.jpg",
+                "https://raw.githubusercontent.com/AdolfoEPerezS/svcamilin/main/Imagen%20de%20WhatsApp%202025-02-12%20a%20las%2001.11.23_93094a70.jpg",
+                "https://raw.githubusercontent.com/AdolfoEPerezS/svcamilin/main/Imagen%20de%20WhatsApp%202025-02-12%20a%20las%2001.11.23_b8e5e5d9.jpg",
+                "https://raw.githubusercontent.com/AdolfoEPerezS/svcamilin/main/Imagen%20de%20WhatsApp%202025-02-12%20a%20las%2001.11.24_5c3f5263.jpg",
+                "https://raw.githubusercontent.com/AdolfoEPerezS/svcamilin/main/Imagen%20de%20WhatsApp%202025-02-12%20a%20las%2001.11.26_9235261e.jpg",
+                "https://raw.githubusercontent.com/AdolfoEPerezS/svcamilin/main/Imagen%20de%20WhatsApp%202025-02-12%20a%20las%2001.11.26_11af789d.jpg",
+                "https://raw.githubusercontent.com/AdolfoEPerezS/svcamilin/main/Imagen%20de%20WhatsApp%202025-02-12%20a%20las%2001.11.25_b13c65d4.jpg",
+                "https://raw.githubusercontent.com/AdolfoEPerezS/svcamilin/main/Imagen%20de%20WhatsApp%202025-02-12%20a%20las%2001.11.25_98df7e68.jpg",
+                "https://raw.githubusercontent.com/AdolfoEPerezS/svcamilin/main/Imagen%20de%20WhatsApp%202025-02-12%20a%20las%2001.11.24_cfb07861.jpg",
+                "https://raw.githubusercontent.com/AdolfoEPerezS/svcamilin/main/Imagen%20de%20WhatsApp%202025-02-12%20a%20las%2001.11.26_d53a8cbd.jpg",
+                "https://raw.githubusercontent.com/AdolfoEPerezS/svcamilin/main/Imagen%20de%20WhatsApp%202025-02-12%20a%20las%2001.11.27_7bc811e9.jpg",
+                "https://raw.githubusercontent.com/AdolfoEPerezS/svcamilin/main/Imagen%20de%20WhatsApp%202025-02-12%20a%20las%2001.11.27_c3c837d6.jpg",
+                "https://raw.githubusercontent.com/AdolfoEPerezS/svcamilin/main/Imagen%20de%20WhatsApp%202025-02-12%20a%20las%2001.11.27_efe11277.jpg",
+                "https://raw.githubusercontent.com/AdolfoEPerezS/svcamilin/main/Imagen%20de%20WhatsApp%202025-02-12%20a%20las%2001.11.28_78c2aa16.jpg",
+                "https://raw.githubusercontent.com/AdolfoEPerezS/svcamilin/main/Imagen%20de%20WhatsApp%202025-02-12%20a%20las%2001.11.28_b56b8a82.jpg"
+            ];
+
+            imageLinks.forEach(src => {
                 let img = document.createElement("img");
                 img.src = src;
                 collage.appendChild(img);
-            });
-            
-            document.getElementById("fileInput").addEventListener("change", function (event) {
-                for (let file of event.target.files) {
-                    let reader = new FileReader();
-                    reader.onload = function (e) {
-                        let img = document.createElement("img");
-                        img.src = e.target.result;
-                        collage.appendChild(img);
-                        
-                        storedImages.push(e.target.result);
-                        localStorage.setItem("collageImages", JSON.stringify(storedImages));
-                    };
-                    reader.readAsDataURL(file);
-                }
             });
         });
     </script>
