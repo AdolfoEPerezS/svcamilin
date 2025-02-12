@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Te Amo</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe6e6;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .love-button {
+            font-size: 2em;
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .love-button:hover {
+            transform: scale(1.1);
+            background-color: #d63384;
+        }
+        h2 {
+            color: #d63384;
+        }
+        .collage {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            max-width: 80%;
+        }
+        .collage img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        input {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <button class="love-button" onclick="window.location.href='carta.html'">Te Amo</button>
+    <div class="collage" id="collage"></div>
+    <h2>Por muchísimos 14 de febrero juntos</h2>
+    
+    <input type="file" id="fileInput" multiple accept="image/*">
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const collage = document.getElementById("collage");
+            const storedImages = JSON.parse(localStorage.getItem("collageImages")) || [];
+            
+            storedImages.forEach(src => {
+                let img = document.createElement("img");
+                img.src = src;
+                collage.appendChild(img);
+            });
+            
+            document.getElementById("fileInput").addEventListener("change", function (event) {
+                for (let file of event.target.files) {
+                    let reader = new FileReader();
+                    reader.onload = function (e) {
+                        let img = document.createElement("img");
+                        img.src = e.target.result;
+                        collage.appendChild(img);
+                        
+                        storedImages.push(e.target.result);
+                        localStorage.setItem("collageImages", JSON.stringify(storedImages));
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
